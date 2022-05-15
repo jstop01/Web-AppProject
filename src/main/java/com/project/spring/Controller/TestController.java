@@ -14,9 +14,15 @@ import java.util.Map;
 public class TestController {
 
     @GetMapping("/login")
-    public String testPage(Model model) {
+    public String loginMove(Model model) {
         model.addAttribute("test","테스트입니다");
         return "login";
     }
+
+    @GetMapping("/")
+    public String indexPage(Model model) {
+        return "index";
+    }
+
 
 }
