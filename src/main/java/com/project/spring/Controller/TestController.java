@@ -24,5 +24,10 @@ public class TestController {
         return "index";
     }
 
+    @GetMapping("/signUp")
+    public String signUpMove(Model model) {
+        return "signUp";
+    }
+
 
 }
