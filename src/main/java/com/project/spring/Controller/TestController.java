@@ -21,7 +21,7 @@ public class TestController {
 
     @GetMapping("/")
     public String indexPage(Model model) {
-        return "index";
+        return "main";
     }
 
     @GetMapping("/signUp")
