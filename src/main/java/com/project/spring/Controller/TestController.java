@@ -29,5 +29,11 @@ public class TestController {
         return "signUp";
     }
 
+    @GetMapping("/saveUser")
+    public String saveUserInfo(Model model) {
+
+        return "jsonview";
+    }
+
 
 }
