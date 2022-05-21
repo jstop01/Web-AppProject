@@ -7,11 +7,11 @@
 </head>
 <body>
 
-<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+<form  name="signUp" action="/signUp" method="POST" class="joinForm" onsubmit="saveUserInfo();">
 
     <h2>회원가입</h2>
     <div class="textForm">
-        <input name="loginId" type="text" class="id" placeholder="아이디">
+        <input name="loginId" th:name="loginId" type="text" class="id" placeholder="아이디">
     </div>
     <div class="textForm">
         <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
@@ -20,16 +20,16 @@
         <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
     </div>
     <div class="textForm">
-        <input name="name" type="password" class="name" placeholder="이름">
+        <input name="userName" type="text" class="name" placeholder="이름">
     </div>
     <div class="textForm">
         <input name="email" type="text" class="email" placeholder="이메일">
     </div>
     <div class="textForm">
-        <input name="nickname" type="text" class="nickname" placeholder="닉네임">
+        <input name="nickName" type="text" class="nickname" placeholder="닉네임">
     </div>
     <div class="textForm">
-        <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
+        <input name="phoneNumber" type="number" class="cellphoneNo" placeholder="전화번호">
     </div>
     <input type="submit" class="btn" value="J O I N"/>
 </form>

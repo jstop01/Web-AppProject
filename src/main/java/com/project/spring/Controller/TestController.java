@@ -1,39 +1,26 @@
 package com.project.spring.Controller;
 
-import com.project.spring.service.TestService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.project.spring.VO.TestVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class TestController {
 
-    @GetMapping("/login")
-    public String loginMove(Model model) {
-        model.addAttribute("test","테스트입니다");
-        return "login";
+    @GetMapping("/dataSendPage")
+    public String dataSendPage(HttpServletRequest param, Model model) {
+        model.addAttribute("form", new TestVO());
+        return "dataSendTest";
     }
 
-    @GetMapping("/")
-    public String indexPage(Model model) {
-        return "main";
+    @RequestMapping(value = "/form", method = RequestMethod.POST)
+    public String dataSendTest(Model model, @ModelAttribute TestVO testVO) {
+        System.out.println(testVO.getName());
+        return testVO.getName();
     }
-
-    @GetMapping("/signUp")
-    public String signUpMove(Model model) {
-        return "signUp";
-    }
-
-    @GetMapping("/saveUser")
-    public String saveUserInfo(Model model) {
-
-        return "jsonview";
-    }
-
-
 }

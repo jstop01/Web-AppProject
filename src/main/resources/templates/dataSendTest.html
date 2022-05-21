@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+
+    <div class="py-4 text-center">
+        <h2>Test Form</h2>
+    </div>
+
+    <form th:action="/form" th:object="${form}" method="post">
+        <div>
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control">
+        </div>
+
+        <button class="btn-primary" type="submit">전송</button>
+    </form>
+</div>
+</body>
+</html>
