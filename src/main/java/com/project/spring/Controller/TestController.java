@@ -19,8 +19,9 @@ public class TestController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String dataSendTest(Model model, @ModelAttribute TestVO testVO) {
+    public String dataSendTest(Model model, @ModelAttribute("form") TestVO testVO) {
         System.out.println(testVO.getName());
-        return testVO.getName();
+
+        return "dataSendTest";
     }
 }

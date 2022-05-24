@@ -13,10 +13,12 @@
         <h2>Test Form</h2>
     </div>
 
-    <form th:action="/form" th:object="${form}" method="post">
+    <form th:action="form" th:object="${form}" method="post">
         <div>
             <label for="name">이름</label>
             <input type="text" id="name" th:field="*{name}" class="form-control">
+
+            <input type="text" id="nameCheck" th:value="${form.name}" class="form-control" readonly>
         </div>
 
         <button class="btn-primary" type="submit">전송</button>

@@ -1,5 +1,6 @@
 package com.project.spring.Controller;
 
+import com.project.spring.VO.RegisterVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +22,10 @@ public class PortalController {
         return "main";
     }
 
-    @GetMapping("/signUp")
+    @GetMapping("/register")
     public String signUpMove(Model model) {
-        return "signUp";
+        model.addAttribute("registerVO", new RegisterVO());
+        return "register";
     }
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
