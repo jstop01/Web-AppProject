@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class RegisterVO {
+public class MemberVO {
     private String userId;
     private String nickName;
     private String userPw;
@@ -13,4 +13,7 @@ public class RegisterVO {
     private String userProfile;
     private String regDate;
     private String acctBan;
+    private String userName;
+
+    private String regPwConf;
 }

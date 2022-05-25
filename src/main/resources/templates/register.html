@@ -7,30 +7,30 @@
 </head>
 <body>
 
-<form  name="signUp" action="/signUp" method="POST" class="joinForm" onsubmit="saveUserInfo();">
+<form name="signUp" th:action="saveUser" th:object="${memberVO}" method="POST" class="joinForm">
 
     <h2>회원가입</h2>
     <div class="textForm">
-        <input name="loginId" th:name="loginId" type="text" class="id" placeholder="아이디">
+        <input name="loginId" th:field="*{userId}" type="text" class="id" placeholder="아이디">
     </div>
     <div class="textForm">
-        <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+        <input name="loginPw" th:field="*{userPw}" type="password" class="pw" placeholder="비밀번호">
     </div>
     <div class="textForm">
-        <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+        <input name="loginPwConfirm" th:field="*{regPwConf}" type="password" class="pw" placeholder="비밀번호 확인">
     </div>
     <div class="textForm">
-        <input name="userName" type="text" class="name" placeholder="이름">
+        <input name="userName" th:field="*{userName}" type="text" class="name" placeholder="이름">
     </div>
     <div class="textForm">
-        <input name="email" type="text" class="email" placeholder="이메일">
+        <input name="email" th:field="*{userEmail}" type="text" class="email" placeholder="이메일">
     </div>
     <div class="textForm">
-        <input name="nickName" type="text" class="nickname" placeholder="닉네임">
+        <input name="nickName" th:field="*{nickName}" type="text" class="nickname" placeholder="닉네임">
     </div>
-    <div class="textForm">
-        <input name="phoneNumber" type="number" class="cellphoneNo" placeholder="전화번호">
-    </div>
+<!--    <div class="textForm">-->
+<!--        <input name="phoneNumber" type="number" class="cellphoneNo" placeholder="전화번호">-->
+<!--    </div>-->
     <input type="submit" class="btn" value="J O I N"/>
 </form>
 
