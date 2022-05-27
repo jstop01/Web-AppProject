@@ -15,6 +15,8 @@ public class TestController {
     @GetMapping("/dataSendPage")
     public String dataSendPage(HttpServletRequest param, Model model) {
         model.addAttribute("form", new TestVO());
+
+
         return "dataSendTest";
     }
 
