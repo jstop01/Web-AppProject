@@ -15,8 +15,13 @@ public class PortalController {
 
     @GetMapping("/login")
     public String loginMove(Model model) {
-        model.addAttribute("test","테스트입니다");
         return "login";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(Model model,@ModelAttribute("memberVO") MemberVO memberVO) {
+
+        return "";
     }
 
     @GetMapping("/portal")
