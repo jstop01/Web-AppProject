@@ -20,7 +20,7 @@ public class PortalController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(Model model,@ModelAttribute("memberVO") MemberVO memberVO) {
-
+        model.addAttribute("memberVO", new MemberVO());
         return "";
     }
 
