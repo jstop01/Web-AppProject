@@ -6,6 +6,9 @@ import com.project.spring.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 @Service
 public class RegisterServiceImpl implements RegisterService {
 
@@ -15,8 +18,13 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public int userRegister(MemberVO memberVO) {
-        int result = registerRepository.userRegister(memberVO);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
 
-        return result;
+        String today = sdf.format(calendar.getTime());
+
+        memberVO.setRegDate(today);
+
+        return registerRepository.userRegister(memberVO);
     }
 }

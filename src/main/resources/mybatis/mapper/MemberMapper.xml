@@ -16,14 +16,14 @@
                                ACCT_BAN,
                                USER_NAME
             ) values
-                                (#{userid},
+                                (#{userId},
                                  #{nickName},
                                  #{userPw},
                                  #{userEmail},
-                                 'N',
+                                 't',
                                  'temp',
                                  now(),
-                                 'N',
+                                 'false',
                                  #{userName}
             )
     </insert>
