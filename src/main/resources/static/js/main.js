@@ -4,5 +4,7 @@ function pageMove(pageNumber) {
         location.href="/register";
     } else if(pageNumber === "2") {
         location.href="/login";
+    } else if(pageNumber === "3") {
+        location.href="/board";
     }
 }
