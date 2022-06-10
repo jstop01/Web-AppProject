@@ -22,4 +22,5 @@ public class BoardServiceImpl implements BoardService {
     public int insertBoard(BoardVO boardVO) {
         return boardRepository.insertBoard(boardVO);
     }
+
 }
