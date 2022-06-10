@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter @Setter
 public class MemberVO {
     private String userId;
-    private String nickName;
     private String userPw;
     private String userEmail;
     private String userEmailCheck;

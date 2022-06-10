@@ -1,38 +1,61 @@
 <!DOCTYPE html>
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
-<link type="text/css" rel="stylesheet" href="/css/signUp.css"/>
+
+<!--<link type="text/css" rel="stylesheet" href="/css/signUp.css"/>-->
+<link href="/css/main.css" type="text/css" rel="stylesheet" />
+<link href="/css/bootstrap/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
 </head>
 <body>
 
+<script src="/js/register.js" type="text/javascript"></script>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container px-5">
+        <a class="navbar-brand" href="javascript:pageMove('4');">SpringBoot & ThymeLeaf</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="javascript:pageMove('1');">회원가입</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:pageMove('2');">로그인</a></li>
+                <li class="nav-item"><a class="nav-link" href="javascript:pageMove('3');">게시판</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <form name="signUp" th:action="saveUser" th:object="${memberVO}" method="POST" class="joinForm">
 
     <h2>회원가입</h2>
-    <div class="textForm">
-        <input name="loginId" th:field="*{userId}" type="text" class="id" placeholder="아이디">
+    <div class="form-group">
+        <label class="col-form-label col-form-label-lg mt-4" for="userName">NAME</label>
+        <input name="userName" id="userName" th:field="*{userName}" type="text" class="form-control form-control-lg" placeholder="홍 길 동">
     </div>
-    <div class="textForm">
-        <input name="loginPw" th:field="*{userPw}" type="password" class="pw" placeholder="비밀번호">
+    <div class="form-group">
+        <label class="col-form-label mt-4" for="loginId">ID</label>
+        <input name="loginId" id="loginId" th:field="*{userId}" type="text" class="form-control" placeholder="ID">
     </div>
-    <div class="textForm">
-        <input name="loginPwConfirm" th:field="*{regPwConf}" type="password" class="pw" placeholder="비밀번호 확인">
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+        <input name="exampleInputPassword1" id="exampleInputPassword1" th:field="*{userPw}" type="password" class="form-control" placeholder="Password">
     </div>
-    <div class="textForm">
-        <input name="userName" th:field="*{userName}" type="text" class="name" placeholder="이름">
+    <div class="form-group">
+        <label for="exampleInputPasswordCheck" class="form-label mt-4">Password Validation</label>
+        <input name="exampleInputPasswordCheck" id="exampleInputPasswordCheck" th:field="*{regPwConf}" type="password" class="form-control" placeholder="Password Validation">
     </div>
-    <div class="textForm">
-        <input name="email" th:field="*{userEmail}" type="text" class="email" placeholder="이메일">
-    </div>
-    <div class="textForm">
-        <input name="nickName" th:field="*{nickName}" type="text" class="nickname" placeholder="닉네임">
+    <div class="form-group">
+        <label for="email" class="form-label mt-4">Email address</label>
+        <input name="email" id="email" th:field="*{userEmail}" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 <!--    <div class="textForm">-->
 <!--        <input name="phoneNumber" type="number" class="cellphoneNo" placeholder="전화번호">-->
 <!--    </div>-->
-    <input type="submit" class="btn" value="J O I N"/>
+    <button type="button" class="btn btn-primary btn-lg">회원가입</button>
 </form>
-
+<!-- Footer-->
+<footer class="py-5 bg-black">
+    <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2022</p></div>
+</footer>
 </body>
 </html>
