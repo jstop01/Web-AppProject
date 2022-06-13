@@ -5,10 +5,13 @@ import com.project.spring.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,8 +28,7 @@ public class MemberController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(Model model,@ModelAttribute("memberVO") MemberVO memberVO) {
-        model.addAttribute("memberVO", new MemberVO());
+    public String login(@ModelAttribute MemberVO memberVO) {
         return "";
     }
 
@@ -37,8 +39,15 @@ public class MemberController {
     }
 
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public String saveUserInfo(Model model,@ModelAttribute("memberVO") MemberVO memberVO) {
+    public String saveUserInfo(Model model, @Validated @ModelAttribute("memberVO") MemberVO memberVO , BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        System.out.println(bindingResult.getFieldError());
+        System.out.println(bindingResult.hasErrors());
+        redirectAttributes.addAttribute("","");
+        if (bindingResult.hasErrors()){
+            return "redirect:/register";
+        }
 
         Date today = new Date();
         memberVO.setRegDate(sdf.format(today));
