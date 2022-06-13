@@ -1,3 +1,16 @@
+$(document).ready(function() {
+    // 모두 로딩되었을때
+    // $("alert alert-dismissible alert-danger").css("visibility", "hidden");
+
+    /*<![CDATA[*/
+
+    var message = [[${errorCheck}]];
+    alert(message);
+
+    /*]]>*/
+});
+
+
 function pageMove(pageNumber) {
     // 1 회원가입 / 2 로그인
     if(pageNumber === "1") {

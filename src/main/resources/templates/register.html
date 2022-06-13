@@ -24,8 +24,11 @@
         </div>
     </div>
 </nav>
-<form name="signUp" th:action="saveUser" th:object="${memberVO}" method="POST" class="joinForm">
-
+<form name="signUp" th:action="@{/saveUser}" th:object="${memberVO}" method="POST" class="joinForm">
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>회원가입에 문제가 생겼습니다.<br></strong> <a href="#" class="alert-link">관리자에게 문의해 주세요.</a>
+    </div>
     <h2>회원가입</h2>
     <div class="form-group">
         <label class="col-form-label col-form-label-lg mt-4" for="userName">NAME</label>
@@ -51,7 +54,8 @@
 <!--    <div class="textForm">-->
 <!--        <input name="phoneNumber" type="number" class="cellphoneNo" placeholder="전화번호">-->
 <!--    </div>-->
-    <button type="button" class="btn btn-primary btn-lg">회원가입</button>
+<!--    <button type="button" class="btn btn-primary btn-lg" onclick="userInsert(${memberVO})">회원가입</button>-->
+    <button type="submit" class="btn btn-primary btn-lg">회원가입</button>
 </form>
 <!-- Footer-->
 <footer class="py-5 bg-black">

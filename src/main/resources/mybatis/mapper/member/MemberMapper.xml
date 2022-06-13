@@ -7,7 +7,6 @@
     <insert id="userRegister" parameterType="com.project.spring.VO.MemberVO">
         insert into USER_INFO (
                                USER_ID,
-                               NICK_NAME,
                                USER_PW,
                                USER_EMAIL,
                                USER_EMAIL_CHECK,
@@ -17,12 +16,11 @@
                                USER_NAME
             ) values
                                 (#{userId},
-                                 #{nickName},
                                  #{userPw},
                                  #{userEmail},
                                  't',
                                  'temp',
-                                 'regDate',
+                                 #{regDate},
                                  'false',
                                  #{userName}
             )

@@ -43,12 +43,15 @@ public class MemberController {
         Date today = new Date();
         memberVO.setRegDate(sdf.format(today));
         int result = registerService.userRegister(memberVO);
-        if(result > 0 ) {
-            return "/portal";
-        }else {
-            return "/error";
+        if(result == 1) {
+            return "login";
+        } else {
+            model.addAttribute("errorCheck","error");
+            return "register";
         }
     }
+
+
 
 
 }

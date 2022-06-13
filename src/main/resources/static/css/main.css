@@ -11387,14 +11387,16 @@ header.masthead .bg-circle-4 {
 }
 
 .joinForm {
-  position:absolute;
+  position:relative;
   width:400px;
   height:400px;
   padding: 30px, 20px;
   background-color:#FFFFFF;
   text-align:center;
-  top:40%;
+  top:30%;
   left:50%;
   transform: translate(-50%,-50%);
   border-radius: 15px;
+  margin-top: 300px;
+  margin-bottom: 100px;
 }
