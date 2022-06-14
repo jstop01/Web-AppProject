@@ -27,4 +27,9 @@ public class RegisterServiceImpl implements RegisterService {
 
         return registerRepository.userRegister(memberVO);
     }
+
+    @Override
+    public int idOverlapCheck(MemberVO memberVO) {
+        return registerRepository.idOverlapCheck(memberVO);
+    }
 }

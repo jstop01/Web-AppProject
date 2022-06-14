@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegisterRepository {
     int userRegister(MemberVO memberVO);
+
+    int idOverlapCheck(MemberVO memberVO);
 }

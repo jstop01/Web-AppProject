@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %5p [%c] %m%n" />
+        </Console>
+        <Console name="console_page" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %5p %m%n" />
+        </Console>
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="jdbc.sqlonly" level="DEBUG" />
+        <Logger name="jdbc.audit" level="OFF" />
+        <Logger name="jdbc.resultset" level="OFF" />
+        <Logger name="jdbc.resultsettable" level="OFF" />
+        <Logger name="jdbc.connection" level="OFF" />
+        <Logger name="log4jdbc.debug" level="OFF" />
+        <Logger name="org.mybatis" level="OFF" />
+
+        <Logger name="org.apache.commons" level="ERROR" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Logger name="org.springframework" level="ERROR" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Logger name="com.project.spring" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+
+        <Logger name="org.springframework.web.servlet.view.JstlView" level="DEBUG" additivity="false">
+            <AppenderRef ref="console_page" />
+        </Logger>
+
+        <Root level="DEBUG">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>

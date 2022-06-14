@@ -1,25 +1,19 @@
-$(document).ready(function() {
-    // 모두 로딩되었을때
-    // $("alert alert-dismissible alert-danger").css("visibility", "hidden");
-
-    /*<![CDATA[*/
-
-    var message = [[${errorCheck}]];
-    alert(message);
-
-    /*]]>*/
-});
-
-
-function pageMove(pageNumber) {
-    // 1 회원가입 / 2 로그인
-    if(pageNumber === "1") {
-        location.href="/register";
-    } else if(pageNumber === "2") {
-        location.href="/login";
-    } else if(pageNumber === "3") {
-        location.href="/board";
-    } else if(pageNumber === "4") {
-        location.href="/";
-    }
-}
+// $(document).ready(function() {
+//     // 모두 로딩되었을때
+//     $("#loginId").on("propertychange change keyup paste input", function() {
+//         var userID = $("#loginId").val();
+//         alert(userID);
+//         $.ajax({
+//             type : "POST",
+//             url : "/idOverlapCheck",
+//
+//             data : {
+//                 userId : userID
+//             },
+//             success : function (data) {
+//             },
+//             error : function (data) {
+//             }
+//         })
+//     });
+// });
