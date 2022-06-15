@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.spring.Repository.file.UploadFileRepository">
+    <insert id="fileInsert" parameterType="com.project.spring.VO.UploadFileVO">
+        INSERT INTO USER_PROFILE(USER_ID, FILE_NUMBER, UPLOAD_FILE_NAME, ORIGIN_FILE_NAME, FILE_URL)
+        VALUES (#{userId}, #{fileNumber}, #{uploadFileName}, #{originFileName}, #{fileUrl})
+    </insert>
+
+
+</mapper>
+

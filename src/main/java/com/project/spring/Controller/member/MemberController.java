@@ -1,7 +1,10 @@
 package com.project.spring.Controller.member;
 
 import com.project.spring.VO.MemberVO;
+import com.project.spring.VO.UploadFileVO;
 import com.project.spring.service.RegisterService;
+import com.project.spring.service.file.UploadFileService;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +17,24 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 @Controller
 public class MemberController {
 
     @Autowired
     RegisterService registerService;
+
+    @Autowired
+    UploadFileService uploadFileService;
 
     private static Logger LOGGER = LoggerFactory.getLogger(MemberController.class);
 
@@ -41,21 +52,22 @@ public class MemberController {
     @GetMapping("/register")
     public String signUpMove(Model model) {
         model.addAttribute("memberVO", new MemberVO());
+        model.addAttribute("uploadFileVO", new UploadFileVO());
         return "register";
     }
 
     @PostMapping(value = "/saveUser")
-    public String saveUserInfo(@Validated @ModelAttribute MemberVO memberVO , BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public String saveUserInfo(@Validated @ModelAttribute MemberVO memberVO , BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model, @RequestPart MultipartFile files) throws Exception {
 
         addUserValidation(memberVO, bindingResult);
         if (bindingResult.hasErrors()){
             LOGGER.info("errors={}", bindingResult);
             return "register";
         }
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date today = new Date();
         memberVO.setRegDate(sdf.format(today));
+        fileUpload(files);
         registerService.userRegister(memberVO);
         return "login";
 
@@ -93,6 +105,38 @@ public class MemberController {
         }
     }
 
+
+    public int fileUpload(MultipartFile files) throws IllegalStateException, IOException, Exception {
+
+        if(files.isEmpty()){ // 파일 데이터 비어 있는지지
+            return 0;
+       } else {
+            String fileName = files.getOriginalFilename(); // 업로드한 파일의 이름을 구함
+            String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();//확장자
+            File destinationFile; //DB에 저장할 파일 고유명
+            String destinationFileName;
+            String fileUrl = "C:/dev/image";//파일경로
+
+            do {
+                destinationFileName = UUID.randomUUID().toString() + "." + fileNameExtension; // UUID와 파일 확장자 합침
+                destinationFile = new File(fileUrl + destinationFileName); //파일 경로 + 파일명.확장자 합치기
+            } while (destinationFile.exists());
+
+            destinationFile.getParentFile().mkdir(); //디렉토리 생성
+            files.transferTo(destinationFile); //업로드한 파일 데이터를 files에 저장
+
+            UploadFileVO file = new UploadFileVO();
+            file.setUploadFileName(destinationFileName);
+            file.setOriginFileName(fileName);
+            file.setFileUrl(fileUrl);
+
+            uploadFileService.fileInsert(file);
+
+            return 1;
+        }
+
+
+    }
 
 
 

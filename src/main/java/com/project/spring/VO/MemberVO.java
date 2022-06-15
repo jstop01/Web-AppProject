@@ -20,6 +20,7 @@ public class MemberVO {
 
     private String regDate;
 
+
     private String acctBan;
     @NotNull @Size(max=50)
     private String userName;
