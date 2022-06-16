@@ -17,3 +17,11 @@
 //         })
 //     });
 // });
+
+
+function fileChange() {
+    debugger
+    var fileData = $("#uploadFile").val();
+    /*$("userProfileChange").src = fileData;*/
+    document.getElementById("uploadFile").src = fileData;
+}

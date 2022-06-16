@@ -4,6 +4,7 @@ import com.project.spring.VO.MemberVO;
 import com.project.spring.VO.UploadFileVO;
 import com.project.spring.service.RegisterService;
 import com.project.spring.service.file.UploadFileService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+@Slf4j
 @Controller
 public class MemberController {
 
@@ -57,7 +59,7 @@ public class MemberController {
     }
 
     @PostMapping(value = "/saveUser")
-    public String saveUserInfo(@Validated @ModelAttribute MemberVO memberVO , BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model, @RequestPart MultipartFile files) throws Exception {
+    public String saveUserInfo(@Validated @ModelAttribute MemberVO memberVO , BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model, @RequestPart(value = "uploadFile", required = false) MultipartFile files) throws IllegalStateException, IOException, Exception {
 
         addUserValidation(memberVO, bindingResult);
         if (bindingResult.hasErrors()){
@@ -67,8 +69,10 @@ public class MemberController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date today = new Date();
         memberVO.setRegDate(sdf.format(today));
-        fileUpload(files);
-        registerService.userRegister(memberVO);
+
+
+        memberProfileInsert(files, memberVO);
+
         return "login";
 
     }
@@ -106,16 +110,18 @@ public class MemberController {
     }
 
 
-    public int fileUpload(MultipartFile files) throws IllegalStateException, IOException, Exception {
+    public void memberProfileInsert(MultipartFile files,MemberVO memberVO) throws IllegalStateException, IOException, Exception {
 
         if(files.isEmpty()){ // 파일 데이터 비어 있는지지
-            return 0;
+            memberVO.setUserProfile("C:/dev/image/defaultProfile.jpg");
+            registerService.userRegister(memberVO);
        } else {
             String fileName = files.getOriginalFilename(); // 업로드한 파일의 이름을 구함
             String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();//확장자
             File destinationFile; //DB에 저장할 파일 고유명
             String destinationFileName;
-            String fileUrl = "C:/dev/image";//파일경로
+            String fileUrl = "C:/dev/image/";//파일경로
+            String fileUrl_Ubuntu = "/home/ljs/userProfile";
 
             do {
                 destinationFileName = UUID.randomUUID().toString() + "." + fileNameExtension; // UUID와 파일 확장자 합침
@@ -129,10 +135,11 @@ public class MemberController {
             file.setUploadFileName(destinationFileName);
             file.setOriginFileName(fileName);
             file.setFileUrl(fileUrl);
+            file.setUserId(memberVO.getUserId());
+            memberVO.setUserProfile(fileUrl+""+destinationFileName);
 
             uploadFileService.fileInsert(file);
-
-            return 1;
+            registerService.userRegister(memberVO);
         }
 
 

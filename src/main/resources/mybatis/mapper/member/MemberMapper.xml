@@ -19,7 +19,7 @@
                                  #{userPw},
                                  #{userEmail},
                                  't',
-                                 'temp',
+                                 #{userProfile},
                                  #{regDate},
                                  'false',
                                  #{userName}
