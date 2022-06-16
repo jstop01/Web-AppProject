@@ -33,7 +33,7 @@
     </div>
     <h2>회원가입</h2>
         <div class="box1" style="background: #BDBDBD;">
-            <img id="userProfileChange" class="profile" src="C:\01.jpg"/>
+            <img id="userProfileChange" class="profile" src="/Users/ijaeseog/Desktop/dev/image/defaultProfile.png"/>
         </div>
     <div class="form-group">
         <label class="col-form-label col-form-label-lg mt-4" for="userName">NAME</label>
@@ -62,7 +62,7 @@
     </div>
     <div class="form-group">
         <label for="uploadFile" class="form-label mt-4">파일을 선택해 주세요.</label>
-        <input class="form-control" type="file" onchange="fileChange();" id="uploadFile" name="uploadFile" accept="image/*"> <!--th:field="*{userProfile}"-->
+        <input class="form-control" type="file" onchange="readImage();" id="uploadFile" name="uploadFile" accept="image/*"> <!--th:field="*{userProfile}"-->
     </div>
     <div class="brank"></div>
     <button type="submit" class="btn btn-primary btn-lg">회원가입</button>

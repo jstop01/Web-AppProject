@@ -113,19 +113,22 @@ public class MemberController {
     public void memberProfileInsert(MultipartFile files,MemberVO memberVO) throws IllegalStateException, IOException, Exception {
 
         if(files.isEmpty()){ // 파일 데이터 비어 있는지지
-            memberVO.setUserProfile("C:/dev/image/defaultProfile.jpg");
+            //memberVO.setUserProfile("C:/dev/image/defaultProfile.jpg"); //윈도우용
+            memberVO.setUserProfile("/Users/ijaeseog/Desktop/dev/image/");//맥용
+            memberVO.setUserProfile("/home/ljs/userProfile/deaultProfile.png");
             registerService.userRegister(memberVO);
        } else {
             String fileName = files.getOriginalFilename(); // 업로드한 파일의 이름을 구함
             String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase();//확장자
             File destinationFile; //DB에 저장할 파일 고유명
             String destinationFileName;
-            String fileUrl = "C:/dev/image/";//파일경로
-            String fileUrl_Ubuntu = "/home/ljs/userProfile";
+            String fileUrl_Windows = "C:/dev/image/";//파일경로
+            String fileUrl_Ubuntu = "/home/ljs/userProfile/";
+            String fileUrl_Mac = "";
 
             do {
                 destinationFileName = UUID.randomUUID().toString() + "." + fileNameExtension; // UUID와 파일 확장자 합침
-                destinationFile = new File(fileUrl + destinationFileName); //파일 경로 + 파일명.확장자 합치기
+                destinationFile = new File(fileUrl_Windows + destinationFileName); //파일 경로 + 파일명.확장자 합치기
             } while (destinationFile.exists());
 
             destinationFile.getParentFile().mkdir(); //디렉토리 생성
@@ -134,9 +137,11 @@ public class MemberController {
             UploadFileVO file = new UploadFileVO();
             file.setUploadFileName(destinationFileName);
             file.setOriginFileName(fileName);
-            file.setFileUrl(fileUrl);
+            file.setFileUrl(fileUrl_Windows);
             file.setUserId(memberVO.getUserId());
-            memberVO.setUserProfile(fileUrl+""+destinationFileName);
+            memberVO.setUserProfile(fileUrl_Windows+""+destinationFileName);  //윈도우용
+            //memberVO.setUserProfile(fileUrl_Ubuntu+""+destinationFileName); //우분투용
+            //memberVO.setUserProfile(fileUrl_Mac+""+destinationFileName);    //맥용
 
             uploadFileService.fileInsert(file);
             registerService.userRegister(memberVO);

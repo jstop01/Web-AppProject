@@ -1,27 +1,28 @@
-// $(document).ready(function() {
-//     // 모두 로딩되었을때
-//     $("#loginId").on("propertychange change keyup paste input", function() {
-//         var userID = $("#loginId").val();
-//         alert(userID);
-//         $.ajax({
-//             type : "POST",
-//             url : "/idOverlapCheck",
-//
-//             data : {
-//                 userId : userID
-//             },
-//             success : function (data) {
-//             },
-//             error : function (data) {
-//             }
-//         })
-//     });
-// });
+$(document).ready(function() {
+    // 모두 로딩되었을때
 
 
-function fileChange() {
-    debugger
-    var fileData = $("#uploadFile").val();
-    /*$("userProfileChange").src = fileData;*/
-    document.getElementById("uploadFile").src = fileData;
+    // input file에 change 이벤트 부여
+    const inputImage = document.getElementById("uploadFile")
+    inputImage.addEventListener("change", e => {
+        readImage(e.target)
+    })
+});
+
+
+function readImage(input) {
+    // 인풋 태그에 파일이 있는 경우
+    if(input.files && input.files[0]) {
+        // 이미지 파일인지 검사 (생략)
+        // FileReader 인스턴스 생성
+        const reader = new FileReader()
+        // 이미지가 로드가 된 경우
+        reader.onload = e => {
+            const previewImage = document.getElementById("userProfileChange")
+            previewImage.src = e.target.result
+        }
+        // reader가 이미지 읽도록 하기
+        reader.readAsDataURL(input.files[0])
+    }
 }
+
