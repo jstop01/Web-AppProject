@@ -96,8 +96,10 @@ public class MemberController {
         //사용자 비밀번호 검증
         if(!StringUtils.hasText(memberVO.getUserPw())) {
             /*bindingResult.addError(new FieldError("memberVO","userPw",memberVO.getUserPw(),false,new String[]{"required.memberVO.userPw"},null,null));*/
-            bindingResult.rejectValue("userPw","required");
+            bindingResult.rejectValue("userPw","PassWordCheck");
         }
+        //사용자 비밀번호 확인 검증
+
         //사용자 이름 검증
         if(!StringUtils.hasText(memberVO.getUserPwConf())) {
             /*bindingResult.addError(new FieldError("memberVO","userPwConf",memberVO.getRegPwConf(),false,new String[]{"required.memberVO.regPwConf"},null,null));*/
